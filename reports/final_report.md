@@ -37,10 +37,10 @@ User Request
 | SLI | SLO target | Actual value | Met? |
 |---|---|---:|---|
 | Availability | >= 99% | 1.0 | yes |
-| Latency P95 | < 2500 ms | 514.61 | yes |
+| Latency P95 | < 2500 ms | 494.21 | yes |
 | Fallback success rate | >= 95% | 1.0 | yes |
-| Cache hit rate | >= 10% | 0.6678 | yes |
-| Recovery time | < 5000 ms | 3202.2310495376587 | yes |
+| Cache hit rate | >= 10% | 0.691 | yes |
+| Recovery time | < 5000 ms | 3079.2752504348755 | yes |
 
 ## 4. Metrics
 
@@ -49,15 +49,15 @@ User Request
 | total_requests | 301 |
 | availability | 1.0 |
 | error_rate | 0.0 |
-| latency_p50_ms | 0.67 |
-| latency_p95_ms | 514.61 |
-| latency_p99_ms | 546.22 |
+| latency_p50_ms | 0.28 |
+| latency_p95_ms | 494.21 |
+| latency_p99_ms | 541.57 |
 | fallback_success_rate | 1.0 |
-| cache_hit_rate | 0.6678 |
+| cache_hit_rate | 0.691 |
 | circuit_open_count | 2 |
-| recovery_time_ms | 3202.2310495376587 |
-| estimated_cost | 0.04524 |
-| estimated_cost_saved | 0.201 |
+| recovery_time_ms | 3079.2752504348755 |
+| estimated_cost | 0.041974 |
+| estimated_cost_saved | 0.208 |
 
 ## 5. Cache comparison
 
@@ -65,10 +65,10 @@ This comparison is generated in the same chaos run using healthy providers with 
 
 | Metric | Without cache | With cache | Delta |
 |---|---:|---:|---|
-| latency_p50_ms | 217.73 | 0.27 | lower is better |
-| latency_p95_ms | 248.08 | 237.01 | lower is better |
-| estimated_cost | 0.06035 | 0.0155 | saved by cache hits |
-| cache_hit_rate | 0.0 | 0.72 | cache reuse enabled |
+| latency_p50_ms | 217.1 | 1.05 | lower is better |
+| latency_p95_ms | 246.47 | 238.65 | lower is better |
+| estimated_cost | 0.05892 | 0.01917 | saved by cache hits |
+| cache_hit_rate | 0.0 | 0.66 | cache reuse enabled |
 
 ## 6. Redis shared cache
 
