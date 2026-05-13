@@ -48,6 +48,53 @@ make run-chaos
 make report
 ```
 
+## Submission status
+
+This implementation completes the core lab path and includes the generated grading artifacts.
+
+### What is implemented
+
+- Circuit breaker state machine with `CLOSED`, `OPEN`, and `HALF_OPEN` transitions.
+- Provider fallback routing with explicit route reasons such as `primary:primary`, `fallback:backup`, `cache_hit:0.95`, and `static_fallback`.
+- In-memory cache with exact-match lookup, deterministic similarity, TTL cleanup, privacy bypass, and false-hit guardrails for different years/IDs.
+- Redis-backed shared cache with hash storage, TTL, exact lookup, similarity scan, shared-state behavior, and graceful miss behavior when Redis operations fail.
+- Chaos simulation with named scenarios, pass/fail criteria, concurrency, recovery-time evidence, and cache-on/cache-off comparison.
+- Report generation with architecture summary, config rationale, SLO table, metrics table, cache comparison, Redis evidence, chaos scenario results, and failure analysis.
+
+### Files to submit
+
+Include these files in the final zip or GitHub submission:
+
+- `src/reliability_lab/` source files
+- `configs/default.yaml`
+- `docker-compose.yml`
+- `reports/metrics.json`
+- `reports/final_report.md`
+- `reports/test_output.txt`
+- `README.md`
+
+### Verification already run
+
+On Windows PowerShell in this workspace, `make` was not available, so the equivalent Python commands were used.
+
+```powershell
+docker compose up -d
+python -m pytest -q
+python -m ruff check src tests scripts
+python scripts\run_chaos.py --config configs\default.yaml --out reports\metrics.json
+python scripts\generate_report.py --metrics reports\metrics.json --out reports\final_report.md --config configs\default.yaml
+```
+
+Observed results:
+
+- Tests with Redis running: `11 passed, 1 xpassed`.
+- Lint: `All checks passed!`.
+- Chaos metrics generated in `reports/metrics.json`.
+- Final report generated in `reports/final_report.md`.
+- Redis shared-cache evidence: a second `SharedRedisCache` instance read a value written by the first instance.
+
+Note: `mypy` could not be installed in this environment because the install timed out, so `make typecheck` was not verified here.
+
 ## Repository structure
 
 ```
